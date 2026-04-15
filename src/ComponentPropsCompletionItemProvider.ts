@@ -18,14 +18,8 @@ export class ComponentPropsCompletionItemProvider implements vscode.CompletionIt
 
       textBeforeCursor = i === position.line ? lineText : lineText + "\n" + textBeforeCursor;
 
-      // Check if this line contains the start of our include/embed
-      if (/(?:include|embed)\s*(?:\(\s*)?['"]/.test(lineText)) {
+      if (/(?:include|embed)\b/.test(lineText)) {
         foundStart = true;
-        break;
-      }
-
-      // Exit if we hit a closing twig tag "{{" or "{%"
-      if (i !== position.line && /(?:%\}|\}\})/.test(lineText)) {
         break;
       }
     }
